@@ -1,0 +1,16 @@
+数据来自：Johannes Lutz Schonberger and Jan-Michael Frahm. ¨Structure-from-motion revisited. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition,2016.
+两个场景“colosseum_exterior”和“hagia_sophia_interior”，每个场景根据相机的角度差异大小分为easy、moderate和hard三个子集（easy:theta(0,15]; moderate:theta(15,30]; hard:theta(30,60)），视点变化依次增加，匹配难度也依次增加。
+每个子集中提供了图像文件和ground truth参数文件（.pkl）。其中，图像文件有20个，构成10个图像对。.pkl文存了每一张图像的信息，包括路径、K、R、t等，数据组织形式为字典。
+
+还提供了用于评价的代码eval-new.py，该代码接收图像之间匹配关键点的坐标，然后读入.pkl文件中的GT，用极线几何判断正确匹配和错误匹配，并统计匹配结果的precision、recall和F1-score。
+
+./data/seqs/modes/images为图像jpg文件
+./data/seqs/modes/KRT_img.pkl为图像标定信息，包含10对图像信息
+```python
+# ---img_path ----图像url
+# ---K
+# ---R
+# ---t
+```
+其中KRT_img.pkl下标{0，1}是一对图像对的标注信息，其它图像对依次为{2， 3}...{8, 9}。
+eval_vis.py， 包含prf评价和匹配结果可视化，其中y_hat为误匹配剔除方法对应每个匹配的标签。
